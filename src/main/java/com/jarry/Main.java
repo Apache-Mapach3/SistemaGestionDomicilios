@@ -97,43 +97,92 @@ public class Main {
 
                         break;
 
-                    case 5:
+                    case 5: gestor.verHistorial();
+                        break;
 
                         break;
 
-                    case 6:
+                    case 6: System.out.print("Ingrese numero de orden: ");
+
+                        String buscarOrden = scanner.nextLine();
+
+                        Domicilio encontrado =
+                                gestor.buscarPorNumeroOrden(buscarOrden);
+
+                        System.out.println(encontrado);
 
                         break;
 
-                    case 7:
+                    case 7: System.out.print("Ingrese nombre cliente: ");
+
+                        String buscarCliente = scanner.nextLine();
+
+                        Optional<Domicilio> resultado =
+                                gestor.buscarPorCliente(buscarCliente);
+
+                        if (resultado.isPresent()) {
+
+                            System.out.println(resultado.get());
+
+                        } else {
+
+                            System.out.println("No encontrado.");
+                        }
+
 
                         break;
 
-                    case 8:
+                    case 8: System.out.print("Ingrese estado: ");
+
+                        String estado = scanner.nextLine();
+
+                        List<Domicilio> filtrados =
+                                gestor.filtrarPorEstado(estado);
+
+                        filtrados.forEach(System.out::println);
 
                         break;
 
-                    case 9:
+                    case 9: List<Domicilio> ordenados =
+                            gestor.ordenarPorCliente();
+
+                        ordenados.forEach(System.out::println);
 
                         break;
 
-                    case 10:
+                    case 10: Map<String, Long> estadisticas =
+                            gestor.estadisticasPorEstado();
+
+                        estadisticas.forEach((clave, valor) ->
+                                System.out.println(clave + ": " + valor));
 
                         break;
 
-                    case 11:
+                    case 11: Map<String, List<Domicilio>> agrupados =
+                            gestor.agruparPorCategoria();
+
+                        agrupados.forEach((categoria, lista) -> {
+
+                            System.out.println("\nCategoria: " + categoria);
+
+                            lista.forEach(System.out::println);
+                        });
 
                         break;
 
-                    case 12:
+                    case 12: System.out.print("Ingrese numero de orden: ");
+
+                        String cancelarOrden = scanner.nextLine();
+
+                        gestor.cancelarDomicilio(cancelarOrden);
 
                         break;
 
-                    case 13:
+                    case 13:     gestor.deshacerUltimoProcesamiento();
 
                         break;
 
-                    case 14:
+                    case 14: gestor.mostrarCantidadElementos();
 
                         break;
 
