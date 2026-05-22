@@ -98,4 +98,47 @@ public class GestorDomicilios {
 
         System.out.println("Ultimo procesado: " + historial.peek());
     }
+
+    // Buscar domicilio por numero de orden usando Map
+    public Domicilio buscarPorNumeroOrden(String numeroOrden) {
+
+        if (!indicePorOrden.containsKey(numeroOrden)) {
+            throw new IllegalArgumentException(
+                    "No existe un domicilio con ese numero de orden."
+            );
+        }
+
+        return indicePorOrden.get(numeroOrden);
+    }
+
+    // Buscar domicilio por nombre usando Stream
+    public Optional<Domicilio> buscarPorCliente(String nombreCliente) {
+
+        return domicilios.stream()
+                .filter(d -> d.getNombreCliente()
+                        .equalsIgnoreCase(nombreCliente))
+                .findFirst();
+    }
+
+    // Buscar domicilio por nombre usando Stream
+    public Optional<Domicilio> buscarPorCliente(String nombreCliente) {
+
+        return domicilios.stream()
+                .filter(d -> d.getNombreCliente()
+                        .equalsIgnoreCase(nombreCliente))
+                .findFirst();
+    }
+
+    public void mostrarCantidadElementos() {
+
+        System.out.println("Total registrados: " + domicilios.size());
+
+        System.out.println("Pendientes: " + pendientes.size());
+
+        System.out.println("Procesados: " + historial.size());
+
+        System.out.println("Total indice Map: " + indicePorOrden.size());
+    }
+
+
 }
