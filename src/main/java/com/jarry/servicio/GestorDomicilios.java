@@ -229,5 +229,54 @@ public class GestorDomicilios {
                                 .equalsIgnoreCase("CANCELADO"));
     }
 
+    // Cancelar domicilio pendiente
+    public void cancelarDomicilio(String numeroOrden) {
+
+        Domicilio domicilio = indicePorOrden.get(numeroOrden);
+
+        if (domicilio == null) {
+            throw new IllegalArgumentException(
+                    "No existe un domicilio con ese numero de orden."
+            );
+        }
+
+        if (!domicilio.getEstado()
+                .equalsIgnoreCase("PENDIENTE")) {
+
+            throw new IllegalStateException(
+                    "Solo se pueden cancelar domicilios pendientes."
+            );
+        }
+
+        domicilio.setEstado("CANCELADO");
+
+        pendientes.removeIf(d ->
+                d.getNumeroOrden()
+                        .equalsIgnoreCase(numeroOrden));
+
+        System.out.println("Domicilio cancelado correctamente.");
+    }
+
+    // Deshacer ultimo procesamiento
+    public void deshacerUltimoProcesamiento() {
+
+        if (historial.isEmpty()) {
+
+            throw new IllegalStateException(
+                    "No hay procesamientos para deshacer."
+            );
+        }
+
+        Domicilio ultimo = historial.pop();
+
+        ultimo.setEstado("PENDIENTE");
+
+        pendientes.offer(ultimo);
+
+        System.out.println(
+                "Ultimo procesamiento deshecho correctamente."
+        );
+    }
+
 
 }
