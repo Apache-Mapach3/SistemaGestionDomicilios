@@ -1,8 +1,16 @@
 package servicio;
-
 import modelo.Domicilio;
-
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Queue;
+import java.util.stream.Collectors;
 
 public class GestorDomicilios {
 
@@ -138,6 +146,87 @@ public class GestorDomicilios {
         System.out.println("Procesados: " + historial.size());
 
         System.out.println("Total indice Map: " + indicePorOrden.size());
+    }
+
+    // Filtrar domicilios por estado
+    public List<Domicilio> filtrarPorEstado(String estado) {
+
+        return domicilios.stream()
+                .filter(d -> d.getEstado()
+                        .equalsIgnoreCase(estado))
+                .toList();
+    }
+
+    // Ordenar por nombre del cliente
+    public List<Domicilio> ordenarPorCliente() {
+
+        return domicilios.stream()
+                .sorted(Comparator.comparing(
+                        Domicilio::getNombreCliente
+                ))
+                .toList();
+    }
+
+    // Ordenar por numero de orden descendente
+    public List<Domicilio> ordenarPorNumeroDesc() {
+
+        return domicilios.stream()
+                .sorted(
+                        Comparator.comparing(
+                                Domicilio::getNumeroOrden
+                        ).reversed()
+                )
+                .toList();
+    }
+
+    // Estadisticas por estado
+    public Map<String, Long> estadisticasPorEstado() {
+
+        return domicilios.stream()
+                .collect(
+                        Collectors.groupingBy(
+                                Domicilio::getEstado,
+                                Collectors.counting()
+                        )
+                );
+    }
+
+    // Agrupar domicilios por categoria
+    public Map<String, List<Domicilio>> agruparPorCategoria() {
+
+        return domicilios.stream()
+                .collect(
+                        Collectors.groupingBy(
+                                Domicilio::getCategoria
+                        )
+                );
+    }
+
+    // Verificar si existen pendientes
+    public boolean existenPendientes() {
+
+        return domicilios.stream()
+                .anyMatch(d ->
+                        d.getEstado()
+                                .equalsIgnoreCase("PENDIENTE"));
+    }
+
+    // Verificar que todos tengan numero de orden
+    public boolean todosTienenNumeroOrden() {
+
+        return domicilios.stream()
+                .allMatch(d ->
+                        d.getNumeroOrden() != null
+                                && !d.getNumeroOrden().isBlank());
+    }
+
+    // Verificar que no existan cancelados
+    public boolean noHayCancelados() {
+
+        return domicilios.stream()
+                .noneMatch(d ->
+                        d.getEstado()
+                                .equalsIgnoreCase("CANCELADO"));
     }
 
 
