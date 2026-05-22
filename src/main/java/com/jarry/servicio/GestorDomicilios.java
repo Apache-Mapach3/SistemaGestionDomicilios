@@ -52,4 +52,50 @@ public class GestorDomicilios {
 
         System.out.println("Domicilio registrado correctamente.");
     }
+
+    // Procesar siguiente domicilio
+    public void procesarSiguienteDomicilio() {
+
+        Domicilio procesado = pendientes.poll();
+
+        if (procesado == null) {
+            throw new IllegalStateException(
+                    "No hay domicilios pendientes."
+            );
+        }
+
+        procesado.setEstado("PROCESADO");
+
+        historial.push(procesado);
+
+        System.out.println("Domicilio procesado correctamente.");
+    }
+
+    public void verPendientes() {
+
+        if (pendientes.isEmpty()) {
+            System.out.println("No hay domicilios pendientes.");
+            return;
+        }
+
+        pendientes.forEach(System.out::println);
+
+        System.out.println("Cantidad pendientes: " + pendientes.size());
+
+        System.out.println("Siguiente pendiente: " + pendientes.peek());
+    }
+
+    public void verHistorial() {
+
+        if (historial.isEmpty()) {
+            System.out.println("No hay historial.");
+            return;
+        }
+
+        historial.forEach(System.out::println);
+
+        System.out.println("Cantidad procesados: " + historial.size());
+
+        System.out.println("Ultimo procesado: " + historial.peek());
+    }
 }
