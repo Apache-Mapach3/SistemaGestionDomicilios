@@ -15,16 +15,16 @@ import java.util.stream.Collectors;
 public class GestorDomicilios {
 
     // LIST -> registro general
-    private List<Domicilio> domicilios;
+    private final List<Domicilio> domicilios;
 
     // QUEUE -> pendientes
-    private Queue<Domicilio> pendientes;
+    private final Queue<Domicilio> pendientes;
 
     // DEQUE -> historial
-    private Deque<Domicilio> historial;
+    private final Deque<Domicilio> historial;
 
     // MAP -> busqueda rápida
-    private Map<String, Domicilio> indicePorOrden;
+    private final Map<String, Domicilio> indicePorOrden;
 
     public GestorDomicilios() {
 
@@ -117,15 +117,6 @@ public class GestorDomicilios {
         }
 
         return indicePorOrden.get(numeroOrden);
-    }
-
-    // Buscar domicilio por nombre usando Stream
-    public Optional<Domicilio> buscarPorCliente(String nombreCliente) {
-
-        return domicilios.stream()
-                .filter(d -> d.getNombreCliente()
-                        .equalsIgnoreCase(nombreCliente))
-                .findFirst();
     }
 
     // Buscar domicilio por nombre usando Stream
@@ -278,5 +269,17 @@ public class GestorDomicilios {
         );
     }
 
+    // Ver todos los domicilios
+    public void verTodosLosDomicilios() {
+
+        if (domicilios.isEmpty()) {
+
+            System.out.println("No hay domicilios registrados.");
+
+            return;
+        }
+
+        domicilios.forEach(System.out::println);
+    }
 
 }
