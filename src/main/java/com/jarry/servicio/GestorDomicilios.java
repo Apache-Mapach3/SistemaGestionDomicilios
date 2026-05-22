@@ -1,126 +1,55 @@
-package modelo;
+package servicio;
 
-import java.util.Objects;
+import modelo.Domicilio;
 
-public class Domicilio {
+import java.util.*;
 
-    private String numeroOrden;
-    private String nombreCliente;
-    private String direccion;
-    private String telefono;
-    private String descripcionPedido;
-    private String categoria;
-    private double costo;
-    private String estado;
+public class GestorDomicilios {
 
-    public Domicilio(String numeroOrden,
-                     String nombreCliente,
-                     String direccion,
-                     String telefono,
-                     String descripcionPedido,
-                     String categoria,
-                     double costo,
-                     String estado) {
+    // LIST -> registro general
+    private List<Domicilio> domicilios;
 
-        this.numeroOrden = numeroOrden;
-        this.nombreCliente = nombreCliente;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.descripcionPedido = descripcionPedido;
-        this.categoria = categoria;
-        this.costo = costo;
-        this.estado = estado;
+    // QUEUE -> pendientes
+    private Queue<Domicilio> pendientes;
+
+    // DEQUE -> historial
+    private Deque<Domicilio> historial;
+
+    // MAP -> busqueda rápida
+    private Map<String, Domicilio> indicePorOrden;
+
+    public GestorDomicilios() {
+
+        domicilios = new ArrayList<>();
+
+        pendientes = new LinkedList<>();
+
+        historial = new ArrayDeque<>();
+
+        indicePorOrden = new HashMap<>();
     }
 
-    public String getNumeroOrden() {
-        return numeroOrden;
-    }
+    // Registrar domicilio
+    public void registrarDomicilio(Domicilio domicilio) {
 
-    public void setNumeroOrden(String numeroOrden) {
-        this.numeroOrden = numeroOrden;
-    }
+        // Validar duplicados
+        if (indicePorOrden.containsKey(domicilio.getNumeroOrden())) {
+            throw new IllegalArgumentException(
+                    "Ya existe un domicilio con ese numero de orden."
+            );
+        }
 
-    public String getNombreCliente() {
-        return nombreCliente;
-    }
+        domicilio.setEstado("PENDIENTE");
 
-    public void setNombreCliente(String nombreCliente) {
-        this.nombreCliente = nombreCliente;
-    }
+        domicilios.add(domicilio);
 
-    public String getDireccion() {
-        return direccion;
-    }
+        pendientes.offer(domicilio);
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
+        indicePorOrden.put(
+                domicilio.getNumeroOrden(),
+                domicilio
+        );
 
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getDescripcionPedido() {
-        return descripcionPedido;
-    }
-
-    public void setDescripcionPedido(String descripcionPedido) {
-        this.descripcionPedido = descripcionPedido;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
-    public double getCosto() {
-        return costo;
-    }
-
-    public void setCosto(double costo) {
-        this.costo = costo;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    @Override
-    public String toString() {
-        return "Domicilio{" +
-                "numeroOrden='" + numeroOrden + '\'' +
-                ", nombreCliente='" + nombreCliente + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", descripcionPedido='" + descripcionPedido + '\'' +
-                ", categoria='" + categoria + '\'' +
-                ", costo=" + costo +
-                ", estado='" + estado + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Domicilio)) return false;
-        Domicilio domicilio = (Domicilio) o;
-        return Objects.equals(numeroOrden, domicilio.numeroOrden);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(numeroOrden);
+        System.out.println("Domicilio registrado correctamente.");
     }
 }
-
