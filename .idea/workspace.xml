@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="774d4468-2bbd-4ba7-92b2-aa9a84df11c5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jarry/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jarry/modelo/Domicilio.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jarry/servicio/GestorDomicilios.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/servicio/GestorDomicilios.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/servicio/GestorDomicilios.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/servicio/GestorDomicilios.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +88,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1779471330568</updated>
-      <workItem from="1779471349697" duration="3213000" />
+      <workItem from="1779471349697" duration="4942000" />
     </task>
     <servers />
   </component>
