@@ -143,8 +143,7 @@ public class GestorDomicilios {
     public List<Domicilio> filtrarPorEstado(String estado) {
 
         return domicilios.stream()
-                .filter(d -> d.getEstado()
-                        .equalsIgnoreCase(estado))
+                .filter(d -> d.getEstado().equalsIgnoreCase(estado))
                 .toList();
     }
 
