@@ -14,7 +14,6 @@ public class Main {
         GestorDomicilios gestor = new GestorDomicilios();
 
         int opcion;
-
         do {
 
             System.out.println("""
