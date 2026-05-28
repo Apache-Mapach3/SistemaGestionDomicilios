@@ -98,16 +98,27 @@ public class Domicilio {
 
     @Override
     public String toString() {
-        return "Domicilio{" +
-                "numeroOrden='" + numeroOrden + '\'' +
-                ", nombreCliente='" + nombreCliente + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", descripcionPedido='" + descripcionPedido + '\'' +
-                ", categoria='" + categoria + '\'' +
-                ", costo=" + costo +
-                ", estado='" + estado + '\'' +
-                '}';
+        return """
+            ------------------------------
+            Numero Orden: %s
+            Cliente: %s
+            Direccion: %s
+            Telefono: %s
+            Pedido: %s
+            Categoria: %s
+            Costo: %.2f
+            Estado: %s
+            ------------------------------
+            """.formatted(
+                numeroOrden,
+                nombreCliente,
+                direccion,
+                telefono,
+                descripcionPedido,
+                categoria,
+                costo,
+                estado
+        );
     }
 
     @Override
